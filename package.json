@@ -3,7 +3,11 @@
   "type": "module",
   "scripts": {
     "dev": "bun --watch src/usage.ts",
-    "test": "vitest",
+    "test:watch": "vitest",
+    "test:primary": "vitest run ./src/primary.test.ts",
+    "test:sorted": "vitest run ./src/sorted.test.ts",
+    "test:substring": "vitest run ./src/substring.test.ts",
+    "test:pimdb": "vitest run ./src/pimdb.test.ts",
     "bench:run": "vitest bench --run",
     "bench:compare": "vitest bench --compare benchmarks.json",
     "bench:baseline": "vitest bench --run --outputJson benchmarks.json"
