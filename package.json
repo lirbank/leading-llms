@@ -9,8 +9,8 @@
     "test:substring": "vitest run ./src/substring.test.ts",
     "test:pimdb": "vitest run ./src/pimdb.test.ts",
     "bench:run": "vitest bench --run",
-    "bench:compare": "vitest bench --compare benchmarks.json",
-    "bench:baseline": "vitest bench --run --outputJson benchmarks.json"
+    "bench:compare": "vitest bench --run --compare src/benchmarks.json",
+    "bench:baseline": "vitest bench --run --outputJson src/benchmarks.json"
   },
   "devDependencies": {
     "@types/bun": "latest",
