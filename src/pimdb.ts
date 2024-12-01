@@ -41,17 +41,37 @@ export class PimCollection<
   }
 
   insert(doc: T): boolean {
-    // TODO: Implement
+    if (this.primary.get(doc.id)) return false;
+
+    const clonedDoc = structuredClone(doc);
+
+    for (const index of Object.values(this.indexes)) {
+      index.insert(clonedDoc);
+    }
+
     return true;
   }
 
   update(doc: T): boolean {
-    // TODO: Implement
+    if (!this.primary.get(doc.id)) return false;
+
+    const clonedDoc = structuredClone(doc);
+
+    for (const index of Object.values(this.indexes)) {
+      index.update(clonedDoc);
+    }
+
     return true;
   }
 
   delete(id: string): boolean {
-    // TODO: Implement
+    const doc = this.primary.get(id);
+    if (!doc) return false;
+
+    for (const index of Object.values(this.indexes)) {
+      index.delete(doc);
+    }
+
     return true;
   }
 }

@@ -12,13 +12,18 @@ import { BaseDocument, PimIndex } from "./pimdb";
  * indexed documents.
  */
 export class PimPrimaryIndex<T extends BaseDocument> implements PimIndex<T> {
+  private map = new Map<T["id"], T>();
+
   /**
    * Insert a document into the index.
    *
    * Returns true if the document was updated, false if it was not found.
    */
   insert(doc: T): boolean {
-    // TODO: Implement
+    if (this.map.has(doc.id)) return false;
+
+    this.map.set(doc.id, doc);
+
     return true;
   }
 
@@ -28,7 +33,12 @@ export class PimPrimaryIndex<T extends BaseDocument> implements PimIndex<T> {
    * Returns true if the document was updated, false if it was not found.
    */
   update(doc: T): boolean {
-    // TODO: Implement
+    const existing = this.map.get(doc.id);
+    if (!existing) return false;
+
+    // Mutate the existing object in place.
+    Object.assign(existing, doc);
+
     return true;
   }
 
@@ -38,21 +48,20 @@ export class PimPrimaryIndex<T extends BaseDocument> implements PimIndex<T> {
    * Returns true if the document was deleted, false if it was not found.
    */
   delete(doc: T): boolean {
-    // TODO: Implement
-    return true;
+    return this.map.delete(doc.id);
   }
 
   /**
    * Get a document from the index by id.
    */
   get(id: T["id"]): T | undefined {
-    return undefined;
+    return this.map.get(id);
   }
 
   /**
    * Get all documents from the index.
    */
   all(): T[] {
-    return [];
+    return Array.from(this.map.values());
   }
 }

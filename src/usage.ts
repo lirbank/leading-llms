@@ -31,7 +31,7 @@ const db = createPimDB({
  * USAGE - queries
  *
  */
-db.users.insert({ id: "1", name: "Alice", age: 30 });
+db.users.insert({ id: "1", name: "Alice Smith", age: 29 });
 db.users.insert({ id: "2", name: "Bob", age: 25 });
 db.users.insert({ id: "3", name: "Charlie", age: 35 });
 
@@ -39,7 +39,7 @@ const alice = db.users.indexes.primary.get("1");
 console.log("Get by primary key (id = 1):", alice);
 
 // Access the name index
-const usersNamedAlice = db.users.indexes.age.find("Alice");
+const usersNamedAlice = db.users.indexes.name.search("Alice");
 console.log("Users named Alice:", usersNamedAlice);
 
 // Access the age range index
@@ -50,7 +50,7 @@ const usersInThirties = db.users.indexes.age.findInRange({
 console.log("Users in their thirties:", usersInThirties);
 
 // Update Alice's age
-db.users.update({ id: "1", name: "Alice", age: 31 });
+db.users.update({ id: "1", name: "Alice Smith", age: 31 });
 
 // Verify the update
 const updatedAlice = db.users.indexes.primary.get("1");
@@ -69,7 +69,7 @@ console.log(
 // Delete Bob
 db.users.delete("2");
 
-// Verify deletion
+// // Verify deletion
 const bob = db.users.indexes.primary.get("2");
 console.log("Bob after deletion:", bob); // Should be undefined
 
