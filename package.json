@@ -2,7 +2,7 @@
   "name": "talk",
   "type": "module",
   "scripts": {
-    "dev": "bun --watch src/index.ts",
+    "dev": "bun --watch src/usage.ts",
     "test": "vitest",
     "bench:run": "vitest bench --run",
     "bench:compare": "vitest bench --compare benchmarks.json",
